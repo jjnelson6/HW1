@@ -3,7 +3,7 @@
 
 // DEVCFG0
 #pragma config DEBUG = OFF // no debugging
-#pragma config JTAGEN = OOFF // no jtag
+#pragma config JTAGEN = OFF // no jtag
 #pragma config ICESEL = ICS_PGx1 // use PGED1 and PGEC1
 #pragma config PWP = OFF // no write protect
 #pragma config BWP = OFF // no boot write protect
@@ -23,9 +23,9 @@
 #pragma config FWDTWINSZ = WINSZ_25 // wdt window at 25%
 
 // DEVCFG2 - get the sysclk clock to 48MHz from the 8MHz crystal
-#pragma config FPLLIDIV = DIV_4 // divide input clock to be in range 4-5MHz
+#pragma config FPLLIDIV = DIV_2 // divide input clock to be in range 4-5MHz
 #pragma config FPLLMUL =  MUL_24// multiply clock after FPLLIDIV
-#pragma config FPLLODIV = DIV_1 // divide clock after FPLLMUL to get 48MHz
+#pragma config FPLLODIV = DIV_2 // divide clock after FPLLMUL to get 48MHz
 #pragma config UPLLIDIV = DIV_2 // divider for the 8MHz input clock, then multiplied by 12 to get 48MHz for USB
 #pragma config UPLLEN = ON // USB clock on
 
@@ -54,11 +54,19 @@ int main() {
     DDPCONbits.JTAGEN = 0;
 
     // do your TRIS and LAT commands here
-
+        
+    TRISAbits.TRISA4 = 0;
+    LATAbits.LATA4 = 1;
+    
+    
+    
+    
     __builtin_enable_interrupts();
 
     while(1) {
 	// use _CP0_SET_COUNT(0) and _CP0_GET_COUNT() to test the PIC timing
 	// remember the core timer runs at half the sysclk
+    //_CP0_SET_COUNT(0)
+    
     }
 }
