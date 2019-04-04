@@ -116,14 +116,11 @@ int main() {
 
     //LATAbits.LATA4 = 1;
 
+    //TRISAbits.TRISA4 = 0;
+    //LATAbits.LATA4 = 1; 
+    TRISBbits.TRISB4 = 1;
+    LATBbits.LATB4 = 1;
     
-
-    
-
-    
-
-    
-
     __builtin_enable_interrupts();
 
 
@@ -134,6 +131,11 @@ int main() {
 
 	// remember the core timer runs at half the sysclk
 
+      while (PORTBbits.RB4 == 0   ){
+          LATAbits.LATA4 = 0;
+      }  
+        
+        
     _CP0_SET_COUNT(0);
     
       TRISAbits.TRISA4 = 0;
@@ -142,9 +144,9 @@ int main() {
        while (_CP0_GET_COUNT() < 11500){
            //do nothing
       }
-     
-      TRISAbits.TRISA4 = 1;
-      LATAbits.LATA4 = 1;
+      
+      TRISAbits.TRISA4 = 0;
+      LATAbits.LATA4 = 0;
       
        while (_CP0_GET_COUNT() < 23000){
            //do nothing
