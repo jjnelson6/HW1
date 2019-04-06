@@ -131,7 +131,8 @@ int main() {
 
 	// remember the core timer runs at half the sysclk
 
-      while (PORTBbits.RB4 == 0   ){
+      while (PORTBbits.RB4 == 0   ) // check voltage on pin RB4
+      {
           LATAbits.LATA4 = 0;
       }  
         
