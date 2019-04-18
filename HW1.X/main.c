@@ -109,17 +109,9 @@ int main() {
 
 
     // do your TRIS and LAT commands here
-
-        
-
-    //TRISAbits.TRISA4 = 0;
-
-    //LATAbits.LATA4 = 1;
-
-    //TRISAbits.TRISA4 = 0;
-    //LATAbits.LATA4 = 1; 
-    TRISBbits.TRISB4 = 1;
-    LATBbits.LATB4 = 1;
+    TRISBbits.TRISB4 = 1;//set switch as input
+    LATBbits.LATB4 = 1; //Set high
+    TRISAbits.TRISA4 = 0; // output A4 (LED))
     
     __builtin_enable_interrupts();
 
@@ -133,21 +125,20 @@ int main() {
 
       while (PORTBbits.RB4 == 0   ) // check voltage on pin RB4
       {
-          LATAbits.LATA4 = 0;
+          LATAbits.LATA4 = 0; //turn off LED
       }  
         
         
     _CP0_SET_COUNT(0);
     
-      TRISAbits.TRISA4 = 0;
-      LATAbits.LATA4 = 1;
+      
+      LATAbits.LATA4 = 1; // high A4 (LED on))
       
        while (_CP0_GET_COUNT() < 11500){
            //do nothing
       }
       
-      TRISAbits.TRISA4 = 0;
-      LATAbits.LATA4 = 0;
+      LATAbits.LATA4 = 0; // Low A4 (LED off))
       
        while (_CP0_GET_COUNT() < 23000){
            //do nothing
